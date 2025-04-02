@@ -1,0 +1,47 @@
+# תלות צומת
+node_modules/
+.pnp
+.pnp.js
+
+# סביבה
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# קובצי IDE ועורכים
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# קובצי מערכת
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# קובצי build
+dist/
+build/
+out/
+.next/
+
+# קובצי בדיקה וקובצים זמניים
+coverage/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# קובצי Vite cache
+.cache/
+.temp/ 
