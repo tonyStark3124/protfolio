@@ -1,28 +1,9 @@
-<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-    <!-- רקע לבן -->
-    <rect width="100%" height="100%" fill="white"/>
-    
-    <!-- ראש -->
-    <ellipse cx="150" cy="160" rx="80" ry="100" fill="beige" stroke="black" stroke-width="3"/>
-    
-    <!-- עיניים -->
-    <circle cx="125" cy="140" r="15" fill="white" stroke="black" stroke-width="3"/>
-    <circle cx="175" cy="140" r="15" fill="white" stroke="black" stroke-width="3"/>
-    <circle cx="130" cy="140" r="6" fill="blue"/>
-    <circle cx="180" cy="140" r="6" fill="blue"/>
-    
-    <!-- גבות -->
-    <path d="M110 120 Q125 110 140 120" stroke="black" stroke-width="4" fill="none"/>
-    <path d="M160 120 Q175 110 190 120" stroke="black" stroke-width="4" fill="none"/>
-    
-    <!-- אף -->
-    <path d="M150 160 Q135 175 150 185" stroke="black" stroke-width="3" fill="none"/>
-    
-    <!-- פה -->
-    <path d="M130 200 Q150 220 170 200" stroke="black" stroke-width="3" fill="none"/>
-    
-    <!-- שיער בלונדיני עם בלורית -->
-    <path d="M90 100 Q150 50 210 100" stroke="gold" stroke-width="6" fill="none"/>
-    <path d="M95 90 Q150 40 205 90" stroke="gold" stroke-width="6" fill="none"/>
-    <path d="M100 80 Q150 30 200 80" stroke="gold" stroke-width="6" fill="none"/>
+<svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- רקע כחול כהה -->
+  <rect width="100%" height="100%" fill="#0A192F"/>
+
+  <!-- שם "TonyH" בכתב יד מסולסל יותר -->
+  <text x="50" y="100" font-family="'Great Vibes', cursive" font-size="50" fill="white">
+    TonyH
+  </text>
 </svg>
