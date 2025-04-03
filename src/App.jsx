@@ -70,8 +70,8 @@ function App() {
   const sendEmail = (e) => {
     e.preventDefault();
     setIsLoading(true);
-
-    emailjs.sendForm('service_2pxzzvo', 'template_kmycz9n', form.current, 'TBjhK7nzDzZYl9m9c')
+    
+    emailjs.sendForm('service_2pxzzvo', 'template_kd9wnu2', form.current, 'TBjhK7nzDzZYl9m9c')
       .then((result) => {
         console.log(result.text);
         alert(language === "he" ? "ההודעה נשלחה בהצלחה!" : "Message sent successfully!");
