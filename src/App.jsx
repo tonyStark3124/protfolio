@@ -5,13 +5,18 @@ import emailjs from 'emailjs-com';
 import './App.css';
 
 // תמונת פרופיל דמו (החלף בתמונה שלך)
-import profileImage from './profile.png';
+import profileImage1 from './profile1.png';
+import profileImage2 from './profile2.png';
+import profileImage3 from './profile3.png';
+let currntImg = 0;
+const profileImages = [profileImage1, profileImage2, profileImage3];
 
 function App() {
   const [projects, setProjects] = useState([]);
   const [darkMode, setDarkMode] = useState(true);
   const [language, setLanguage] = useState("he");
   const [isLoading, setIsLoading] = useState(true);
+  const [profileImage, setProfileImage] = useState(profileImages[currntImg])
   const form = useRef();
   const { scrollYProgress } = useScroll();
   const controls = useAnimation();
@@ -171,7 +176,15 @@ function App() {
         </motion.div>
 
         {/* תוכן מרכזי */}
-        <div className="header-center">
+        <div 
+            className="header-center"
+            onClick={()=>
+              {
+              currntImg = currntImg + 1 === profileImages.length ? 0 : currntImg + 1; 
+              setProfileImage(profileImages[currntImg])
+              }
+            }
+        >
           <motion.div 
             className="profile-image-container"
             initial={{ opacity: 0, scale: 0.8 }}
