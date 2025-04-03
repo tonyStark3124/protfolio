@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useAnimation } from 'framer-motion';
 import { Player } from '@lottiefiles/react-lottie-player';
+import emailjs from 'emailjs-com';
 import './App.css';
 
 // תמונת פרופיל דמו (החלף בתמונה שלך)
@@ -14,6 +15,7 @@ function App() {
   const form = useRef();
   const { scrollYProgress } = useScroll();
   const controls = useAnimation();
+
 
   // פלטת צבעים מעודכנת
   const colors = {
@@ -65,6 +67,22 @@ function App() {
     }
   ];
 
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    emailjs.sendForm('service_2pxzzvo', 'template_kmycz9n', form.current, 'TBjhK7nzDzZYl9m9c')
+      .then((result) => {
+        console.log(result.text);
+        alert(language === "he" ? "ההודעה נשלחה בהצלחה!" : "Message sent successfully!");
+        setIsLoading(false);
+      }, (error) => {
+        console.log(error.text);
+        alert(language === "he" ? "הייתה בעיה בשליחת ההודעה" : "There was an issue sending the message");
+        setIsLoading(false);
+      });
+  };
+
   // אנימציית הקלדה לכותרת
   useEffect(() => {
     const title = language === "he" ? "הפורטפוליו שלי" : "My Portfolio";
@@ -77,7 +95,7 @@ function App() {
   // טעינת פרויקטים
   useEffect(() => {
     const timer = setTimeout(() => {
-      fetch("https://api.github.com/users/your-username/repos")
+      fetch("https://api.github.com/users/tonyStark3124/repos")
         .then(res => res.ok ? res.json() : Promise.reject())
         .then(data => {
           if(data.length > 0) {
@@ -173,9 +191,18 @@ function App() {
               animate={controls}
               className="header-title"
             >
-              {language === "he" ? "הפורטפוליו שלי" : "My Portfolio"}
+              {language !== "he" ? "My Portfolio" : "הפורטפוליו שלי"}
             </motion.h1>
-            
+
+            <motion.h4
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5 }}
+              className="header-subtitle"
+            >
+              {language === "he" ? "טוביה חפץ" : "Tuvia Hefets"}
+            </motion.h4>
+
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -214,12 +241,13 @@ function App() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="section-title">{language === "he" ? "עליי" : "About Me"}</h2>
-          <p className="section-content">
-            {language === "he" 
-              ? "מפתח Full Stack עם ניסיון ביצירת אתרים מודרניים ואפליקציות אינטראקטיביות. מתמחה בטכנולוגיות עדכניות עם דגש על חווית משתמש." 
-              : "Full Stack developer experienced in creating modern websites and interactive apps. Specializing in cutting-edge technologies with a focus on user experience."}
-          </p>
+        <h2 className="section-title">{language === "he" ? "עליי" : "About Me"}</h2>
+        <p className="section-content">
+          {language === "he" 
+            ? "היי, אני מפתח פול סטאק עם תשוקה לטכנולוגיה, דאטה ואבטחת מידע. התחלתי את דרכי כהנדסאי תוכנה והתפתחתי לעולם הדאטה אנליזה והפיתוח המלא (Full Stack). אני אוהב לקחת רעיונות ולהפוך אותם למוצרים חכמים ומאובטחים, עם דגש על ביצועים וחוויית משתמש. מתמחה ב-React, Node.js, SQL & NoSQL, ושואף תמיד ללמוד ולהתפתח."
+            : "Hey, I'm a Full Stack developer passionate about technology, data, and cybersecurity. I started as a software engineer and evolved into data analytics and full-stack development. I love turning ideas into smart and secure products, with a focus on performance and user experience. Specializing in React, Node.js, SQL & NoSQL, and always eager to learn and grow."}
+        </p>
+
         </motion.section>
 
         {/* סקציית פרויקטים */}
@@ -259,65 +287,65 @@ function App() {
 
         {/* סקציית צור קשר */}
         <motion.section
-          className="contact-section"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="section-title">{language === "he" ? "צור קשר" : "Contact Me"}</h2>
+        className="contact-section"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <h2 className="section-title">{language === "he" ? "צור קשר" : "Contact Me"}</h2>
+        
+        <form ref={form} className="contact-form" onSubmit={sendEmail}>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <input 
+              type="text" 
+              name="name" 
+              placeholder={language === "he" ? "שם מלא" : "Full Name"} 
+              required 
+            />
+          </motion.div>
           
-          <form ref={form} className="contact-form">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <input 
-                type="text" 
-                name="name" 
-                placeholder={language === "he" ? "שם מלא" : "Full Name"} 
-                required 
-              />
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <input 
-                type="email" 
-                name="email" 
-                placeholder={language === "he" ? "אימייל" : "Email"} 
-                required 
-              />
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <textarea 
-                name="message" 
-                placeholder={language === "he" ? "הודעה" : "Message"} 
-                required 
-              />
-            </motion.div>
-            
-            <motion.button
-              type="submit"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              {language === "he" ? "שלח הודעה" : "Send Message"}
-            </motion.button>
-          </form>
-        </motion.section>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <input 
+              type="email" 
+              name="email" 
+              placeholder={language === "he" ? "אימייל" : "Email"} 
+              required 
+            />
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <textarea 
+              name="message" 
+              placeholder={language === "he" ? "הודעה" : "Message"} 
+              required 
+            />
+          </motion.div>
+          
+          <motion.button
+            type="submit"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            {language === "he" ? "שלח הודעה" : "Send Message"}
+          </motion.button>
+        </form>
+      </motion.section>
       </main>
 
       <footer className="site-footer">
