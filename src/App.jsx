@@ -4,7 +4,7 @@ import { Player } from '@lottiefiles/react-lottie-player';
 import './App.css';
 
 // תמונת פרופיל דמו (החלף בתמונה שלך)
-import profileImage from './profile.jpg';
+import profileImage from './profile.png';
 
 function App() {
   const [projects, setProjects] = useState([]);
