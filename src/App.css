@@ -80,6 +80,7 @@ header {
   overflow: hidden;
   border: 3px solid var(--primary);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer; /* מוסיף סמן יד כדי להראות שניתן ללחוץ */
 }
 
 .profile-image {

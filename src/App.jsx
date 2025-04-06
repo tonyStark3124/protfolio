@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useAnimation } from 'framer-motion';
+import { motion, useScroll, useAnimation, hover } from 'framer-motion';
 import { Player } from '@lottiefiles/react-lottie-player';
 import emailjs from 'emailjs-com';
 import './App.css';
@@ -16,7 +16,9 @@ function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [language, setLanguage] = useState("he");
   const [isLoading, setIsLoading] = useState(true);
-  const [profileImage, setProfileImage] = useState(profileImages[currntImg])
+  const [profileImage, setProfileImage] = useState(profileImages[currntImg]);
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const form = useRef();
   const { scrollYProgress } = useScroll();
   const controls = useAnimation();
@@ -43,7 +45,9 @@ function App() {
       header: 'rgba(248, 250, 252, 0.9)'
     }
   };
-
+  const handleClick = () => {
+      setIsExpanded(!isExpanded);
+    }
   // פרויקטי דמו אם אין תשובה מ-GitHub
   const demoProjects = [
     {
@@ -188,8 +192,13 @@ function App() {
           <motion.div 
             className="profile-image-container"
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+            animate={{ 
+              opacity: 1, 
+              scale: isExpanded ? 2 : 1 // הגדלה פי 2 כשמורחב
+            }}
+            transition={{ duration: 0.3 }} // שיניתי ל-0.3 כדי להתאים ל-transition הקיים ב-CSS
+            onDoubleClick={handleClick}
+            whileTap={{ cursor: "pointer" }} // מראה שהאלמנט ניתן ללחיצה
           >
             <img 
               src={profileImage} 
